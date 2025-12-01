@@ -6,11 +6,66 @@
 //
 
 import XCTest
+import Testing
+
+// We can have both XCTest and Swift Testing in the same file
+// We can migrate gradually haha
+
+struct CartStoreTest {
+    @Test("Get total amount to pay as string")
+    func totalAmountString() {
+        let cartItems = [
+            CartItem(
+                product: Product(
+                    id: 1,
+                    title: "test1",
+                    price: 123.12,
+                    description: "",
+                    category: "",
+                    imageURL: URL(string: "www.apple.com")!
+                ),
+                quantity: 3
+            ),
+            CartItem(
+                product: Product(
+                    id: 2,
+                    title: "test2",
+                    price: 77.56,
+                    description: "",
+                    category: "",
+                    imageURL: URL(string: "www.apple.com")!
+                ),
+                quantity: 1
+            ),
+            CartItem(
+                product: Product(
+                    id: 3,
+                    title: "test2",
+                    price: 91.0,
+                    description: "",
+                    category: "",
+                    imageURL: URL(string: "www.apple.com")!
+                ),
+                quantity: 2
+            ),
+        ]
+        let cartStore = CartStore(
+            cartItems: cartItems,
+            apiClient: .testSuccess
+        )
+        
+//        let expected = "$628.92"
+//        let actual = cartStore.totalPriceString
+    
+        #expect(cartStore.totalPriceString == "$628.92")
+    }
+}
 
 @testable import OnlineStoreMV
 
-final class CartStoreTest: XCTestCase {
+final class CartStoreTest_Deprecated: XCTestCase {
 
+    /*
     func testTotalAmountString() throws {
         
         let cartItems = [
@@ -58,6 +113,7 @@ final class CartStoreTest: XCTestCase {
         
         XCTAssertEqual(actual, expected, "Actual result is not the same as expected")
     }
+    */
     
     func testSubtractQuantityFromItemInCart() {
         let product1 = Product(
