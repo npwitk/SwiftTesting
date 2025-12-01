@@ -14,8 +14,4 @@ The original OnlineStore project is built with SwiftUI (Vanilla) and Observation
 
 ## Tutorial
 
-Following the **Mastering Swift Testing** tutorial to learn and implement:
-- Swift Testing framework fundamentals
-- Migrating from XCTest to Swift Testing
-- Modern testing patterns and best practices
-- Test organization and structure
+Following the **Mastering Swift Testing** tutorial to learn and implement on this [YouTube Playlist](https://www.youtube.com/playlist?list=PLHWvYoDHvsOV67md_mU5nMN_HDZK7rEKn)
