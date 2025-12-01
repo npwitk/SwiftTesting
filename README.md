@@ -1,8 +1,21 @@
-# OnlineStore made with SwiftUI (Vanilla) and Observation
+# Swift Testing Tutorial Project
 
-## Motivation
+This project is forked from [pitt500/OnlineStoreMV](https://github.com/pitt500/OnlineStoreMV) and follows the **Mastering Swift Testing** tutorial.
 
-Please check out this [article](https://swiftandtips.com/is-mvvm-necessary-for-developing-apps-with-swiftui), where I explain in detail the reasons behind creating this demo.
+## About This Fork
 
-## Observation
-For more information about implementing observation pattern in SwiftUI, check out this [article](https://swiftandtips.com/implementing-observation-in-swiftui).
+This repository demonstrates the migration from XCTest to Swift Testing framework, following best practices and modern testing approaches in Swift.
+
+## Original Project
+
+The original OnlineStore project is built with SwiftUI (Vanilla) and Observation pattern. For more information about the original implementation:
+- [Article on MVVM in SwiftUI](https://swiftandtips.com/is-mvvm-necessary-for-developing-apps-with-swiftui)
+- [Article on Observation pattern](https://swiftandtips.com/implementing-observation-in-swiftui)
+
+## Tutorial
+
+Following the **Mastering Swift Testing** tutorial to learn and implement:
+- Swift Testing framework fundamentals
+- Migrating from XCTest to Swift Testing
+- Modern testing patterns and best practices
+- Test organization and structure
