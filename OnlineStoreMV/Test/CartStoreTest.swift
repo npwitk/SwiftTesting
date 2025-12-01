@@ -59,7 +59,7 @@ final class CartStoreTest: XCTestCase {
         XCTAssertEqual(actual, expected, "Actual result is not the same as expected")
     }
     
-    func testSubstractQuantityFromItemInCart() {
+    func testSubtractQuantityFromItemInCart() {
         let product1 = Product(
             id: 1,
             title: "test1",
@@ -114,7 +114,7 @@ final class CartStoreTest: XCTestCase {
         XCTAssertEqual(expectedQuantity, actualQuantity)
     }
     
-    func testSubstractQuantityFromItemInCartUntilMakeItZero() {
+    func testSubtractQuantityFromItemInCartUntilMakeItZero() {
         let product1 = Product(
             id: 1,
             title: "test1",
