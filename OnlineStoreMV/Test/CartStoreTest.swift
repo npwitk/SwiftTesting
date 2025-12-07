@@ -9,11 +9,23 @@ import XCTest
 import Testing
 @testable import OnlineStoreMV
 
+extension Tag {
+    @Tag static let price: Self
+    @Tag static let product: Self
+    @Tag static let quantity: Self
+}
+
 // We can have both XCTest and Swift Testing in the same file
 // We can migrate gradually haha
+
+
+
 @Suite("Cart Store Tests")
 struct CartStoreTest {
-    @Test("Get total amount to pay as string")
+    @Test(
+        "Get total amount to pay as string",
+        .tags(.price)
+    )
     func totalAmountString() {
         let cartItems = [
             CartItem(
@@ -62,7 +74,10 @@ struct CartStoreTest {
     }
     
     // We can also have a subset of tests
-    @Suite("Subtracting Quantity on Cart Items")
+    @Suite(
+        "Subtracting Quantity on Cart Items",
+        .tags(.quantity)
+    )
     struct SubtractingTest {
         @Test
         func quantityFromItemInCart() {
@@ -182,7 +197,7 @@ struct CartStoreTest {
     
     @Suite("Removing Items from Cart")
     struct RemovingTest {
-        @Test
+        @Test(.tags(.product))
         func oneProductFromCart() {
             let product1 = Product(
                 id: 1,
@@ -212,7 +227,7 @@ struct CartStoreTest {
             XCTAssertEqual(expected, actual)
         }
         
-        @Test
+        @Test(.tags(.product))
         func allItemsFromCart() {
             let product1 = Product(
                 id: 1,
@@ -269,7 +284,7 @@ struct CartStoreTest {
     
     @Suite("Quantity Tests")
     struct QuantityTesting {
-        @Test
+        @Test(.tags(.product))
         func productInCart() {
             let product1 = Product(
                 id: 1,
@@ -296,7 +311,7 @@ struct CartStoreTest {
             XCTAssertEqual(expected, actual)
         }
         
-        @Test
+        @Test(.tags(.product))
         func nonExistingProudctInCart() {
             let product1 = Product(
                 id: 1,
@@ -334,7 +349,7 @@ struct CartStoreTest {
     
     @Suite("Add Quantity Tests")
     struct AddingTest {
-        @Test
+        @Test(.tags(.quantity))
         func quantityFromExistingItemInCart() {
             let product1 = Product(
                 id: 1,
@@ -391,7 +406,7 @@ struct CartStoreTest {
             XCTAssertEqual(expectedQuantity, actualQuantity)
         }
         
-        @Test
+        @Test(.tags(.quantity))
         func quantityFromNewItemInCart() {
             let product1 = Product(
                 id: 1,
