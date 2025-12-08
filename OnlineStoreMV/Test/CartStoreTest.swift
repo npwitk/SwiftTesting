@@ -245,3 +245,30 @@ struct CartStoreTest {
     }
     
 }
+
+@Suite(.serialized)
+struct ParallelTesting_Demo {
+
+    let state = StateTest()
+    
+    @Test
+    func test1() {
+        state.addNumber([4, 5])
+        #expect(state.count == 5)
+        #expect(state.removeLastNumber()! == 5)
+    }
+    
+    @Test
+    func test2() {
+        state.addNumber([6, 7])
+        #expect(state.count == 6)
+        #expect(state.removeLastNumber()! == 7)
+    }
+    
+    @Test
+    func test3() {
+        state.addNumber([8, 9])
+        #expect(state.count == 7)
+        #expect(state.removeLastNumber()! == 9)
+    }
+}

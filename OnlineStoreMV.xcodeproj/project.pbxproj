@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -68,6 +68,10 @@
 		B58F25ED2B96E58F000CAD57 /* OnlineStoreMV.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OnlineStoreMV.entitlements; sourceTree = "<group>"; };
 		B58F25EF2B96E58F000CAD57 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		95785E672EE69A0F00DD200F /* ParallelTesting */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = ParallelTesting; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		B559E6AA2B9AF88D002218EB /* Frameworks */ = {
@@ -156,6 +160,7 @@
 		B559E6A82B9AF872002218EB /* Test */ = {
 			isa = PBXGroup;
 			children = (
+				95785E672EE69A0F00DD200F /* ParallelTesting */,
 				B559E6B82B9AF8C3002218EB /* CartStoreTest.swift */,
 			);
 			path = Test;
@@ -222,6 +227,9 @@
 			dependencies = (
 				B559E6B22B9AF88D002218EB /* PBXTargetDependency */,
 			);
+			fileSystemSynchronizedGroups = (
+				95785E672EE69A0F00DD200F /* ParallelTesting */,
+			);
 			name = OnlineStoreMVTests;
 			productName = OnlineStoreMVTests;
 			productReference = B559E6AD2B9AF88D002218EB /* OnlineStoreMVTests.xctest */;
@@ -238,6 +246,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				95785E672EE69A0F00DD200F /* ParallelTesting */,
 			);
 			name = OnlineStoreMV;
 			productName = OnlineStoreMV;
