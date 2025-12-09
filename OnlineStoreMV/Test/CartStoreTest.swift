@@ -121,31 +121,30 @@ struct CartStoreTest {
     
     @Suite("Removing Items from Cart")
     struct RemovingTest {
-        @Test(.tags(.product))
-        func oneProductFromCart() {
-            let product1 = Product(
-                id: 1,
-                title: "test1",
-                price: 123.12,
-                description: "",
-                category: "",
-                imageURL: URL(string: "www.apple.com")!
-            )
-            let cartItems = [
-                CartItem(
-                    product: product1,
-                    quantity: 4
-                )
+        @Test(
+            .tags(.product),
+            arguments: [
+                (products[0], 3),
+                (products[1], 5),
+                (products[2], 4)
             ]
+        )
+        func oneProductFromCart(
+            product: Product,
+            expectedQuantity: Int
+        ) {
             let cartStore = CartStore(
                 cartItems: cartItems,
                 apiClient: .testSuccess
             )
             
+            cartStore.removeAllFromCart(product: product)
+            let quantity = cartStore.cartItems.reduce(0) {
+                $0 + $1.quantity
+            }
             
-            cartStore.removeAllFromCart(product: product1)
-            
-            #expect(cartStore.cartItems.isEmpty)
+            #expect(cartStore.cartItems.count == 2)
+            #expect(quantity == expectedQuantity)
         }
         
         @Test(.tags(.product))
