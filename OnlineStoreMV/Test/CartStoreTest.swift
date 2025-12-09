@@ -251,7 +251,7 @@ struct CartStoreTest {
 
 @Suite(.serialized)
 struct ParallelTesting_Demo {
-
+    
     let state = StateTest()
     
     @Test
@@ -278,14 +278,60 @@ struct ParallelTesting_Demo {
 
 
 struct HeavyTestDemo {
-
+    
     @Test(.timeLimit(.minutes(1)))
     func calculateExpensiveOperation() async throws {
         
         // Simulate a very heavy task (2 minutes)
         try await Task.sleep(nanoseconds: 120 * 1_000_000_000)
-
+        
         // This line probably never runs if timeout triggers
         #expect(true)
     }
 }
+
+enum ContainerError: Error, Equatable {
+    case empty
+}
+
+struct MyContainer {
+    private var storage: [Int] = []
+    
+    mutating func add(_ value: Int) {
+        storage.append(value)
+    }
+    
+    mutating func removeLast() -> Int? {
+        storage.popLast()
+    }
+    
+    mutating func removeAll() throws {
+        guard !storage.isEmpty else {
+            throw ContainerError.empty
+        }
+        storage.removeAll()
+    }
+}
+
+var container = MyContainer()
+
+struct ConditionalTests {
+    
+    @Test
+    func fetchingLastElement() async throws {
+        container.add(4)
+        
+        let last = container.removeLast()
+        
+        let unwrapped = try #require(last, "last value should be 4")
+        #expect(unwrapped == 4)
+    }
+    
+    @Test
+    func removeAllElements() async throws {
+        try #require(throws: ContainerError.empty) {
+            try container.removeAll()
+        }
+    }
+}
+
