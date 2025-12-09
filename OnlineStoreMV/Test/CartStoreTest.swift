@@ -335,3 +335,52 @@ struct ConditionalTests {
     }
 }
 
+
+enum APIVersion {
+    case v1
+    case v2
+    case v3
+}
+
+let apiVersion = APIVersion.v2
+
+struct ConditionalTests_2 {
+
+    @Test(
+        "API v1 – test1",
+        .enabled(if: apiVersion == .v1),
+        .disabled(),
+        .bug(id: "ABC-1234")
+    )
+    func test1() async throws {
+        let value = 1
+        #expect(value == 1)
+    }
+
+    @Test(
+        "API v1 – test2",
+        .enabled(if: apiVersion == .v1)
+    )
+    func test2() async throws {
+        let value = 2
+        #expect(value == 2)
+    }
+
+    @Test(
+        "API v2 – test3",
+        .enabled(if: apiVersion == .v2)
+    )
+    func test3() async throws {
+        let value = 3
+        #expect(value == 3)
+    }
+    
+    @Test(
+        "API v3",
+        .enabled(if: apiVersion == .v3)
+    )
+    func test4() async throws {
+        let value = 4
+        #expect(value == 4)
+    }
+}
