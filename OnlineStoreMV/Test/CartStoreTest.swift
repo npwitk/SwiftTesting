@@ -275,3 +275,17 @@ struct ParallelTesting_Demo {
         #expect(state.removeLastNumber()! == 9)
     }
 }
+
+
+struct HeavyTestDemo {
+
+    @Test(.timeLimit(.minutes(1)))
+    func calculateExpensiveOperation() async throws {
+        
+        // Simulate a very heavy task (2 minutes)
+        try await Task.sleep(nanoseconds: 120 * 1_000_000_000)
+
+        // This line probably never runs if timeout triggers
+        #expect(true)
+    }
+}
