@@ -384,3 +384,77 @@ struct ConditionalTests_2 {
         #expect(value == 4)
     }
 }
+
+/// Migrating XCTest setUp/tearDown to init/deinit (with a caveat)
+//var myValue = 0
+//
+//final class InitilizationDemo_deprecated: XCTestCase {
+//    
+////    override class func setUp() {
+////        myValue = 0 // Restart the count for every tests
+////    }
+//    
+//    override class func tearDown() { // Will be execute after every tests
+//        myValue = 0
+//    }
+//    
+//    func test1() {
+//        myValue += 10
+//        XCTAssertEqual(myValue, 10)
+//    }
+//    
+//    func test2() {
+//        myValue += 10
+//        XCTAssertEqual(myValue, 10)
+//    }
+//    
+//    func test3() {
+//        myValue += 10
+//        XCTAssertEqual(myValue, 10)
+//    }
+//}
+
+
+var myValue = 0
+
+@Suite(.serialized)
+final class InitilizationDemo {
+    // We don't have setUp() and tearDown() in Swift Testing
+    
+    init() {
+        print("init called") // In each test, this is called!
+        myValue = 0
+    }
+    
+    deinit {
+        // Change struct to class for deinit to run, but it's not guaranteed to be called
+        // because tests run in parallel.
+        //
+        // To make this reliable, either:
+        // 1. Mark the test suite as .serialized, or
+        // 2. Avoid depending on shared mutable state.
+        print("denit called")
+        myValue = 0
+    }
+    
+    @Test
+    func test1() {
+        print("Test1 executed")
+        myValue += 10
+        #expect(myValue == 10)
+    }
+    
+    @Test
+    func test2() {
+        print("Test2 executed")
+        myValue += 10
+        #expect(myValue == 10)
+    }
+    
+    @Test
+    func test3() {
+        print("Test3 executed")
+        myValue += 10
+        #expect(myValue == 10)
+    }
+}
