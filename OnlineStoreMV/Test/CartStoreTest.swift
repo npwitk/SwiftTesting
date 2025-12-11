@@ -458,3 +458,53 @@ final class InitilizationDemo {
         #expect(myValue == 10)
     }
 }
+
+/// Transition from XCTFail to Issue.record
+
+
+
+
+struct APIClient {
+    let fetchProducts: () async throws -> [Product]
+
+    static let testSuccess = APIClient {
+        return products   // ← YES, using your global array
+    }
+
+    static let testError = APIClient {
+        throw URLError(.badServerResponse)
+    }
+}
+
+final class ProductDemo_deprecated: XCTestCase {
+
+    func testFetchThreeProductsFromAPI() async {
+        let productStore = ProductStore(apiClient: .testSuccess) // change to .testError to test
+
+        await productStore.fetchProducts()
+
+        guard case .loaded(let products) = productStore.loadingState else {
+            XCTFail("Expected .loaded state but got \(productStore.loadingState)")
+            return
+        }
+
+        XCTAssertEqual(products.count, 3)
+    }
+
+}
+
+final class ProductDemoTest {
+    
+    @Test
+    func fetchThreeProductsFromAPI() async {
+        let productStore = ProductStore(apiClient: .testSuccess)
+        await productStore.fetchProducts()
+
+        guard case .loaded(let products) = productStore.loadingState else {
+            Issue.record("Expected .loaded state but got \(productStore.loadingState)")
+            return
+        }
+        
+        #expect(products.count == 3)
+    }
+}
